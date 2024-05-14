@@ -1,0 +1,45 @@
+-- TEST CASES
+
+-- 1.	Basic Retrieval Queries:
+
+-- All customers
+
+SELECT * FROM customer;
+
+-- All orders
+
+SELECT * FROM orders;
+
+-- All Shipments
+
+SELECT * FROM shipment;
+
+-- 2.	Querying with Conditions:
+
+-- Retrieve orders with order type 'Express':
+
+SELECT * FROM orders WHERE order_type = 'Express';
+
+-- Retrieve customers from a specific postal code:
+
+SELECT * FROM customer WHERE postal_code = '54000';
+-- 3.	Join Queries:
+
+-- Retrieve orders along with corresponding customer information:
+
+SELECT o.*, c.first_name, c.last_name, c.email 
+FROM orders o
+JOIN customer c ON o.sender_id = c.id;
+
+-- Retrieve shipments along with corresponding order and customer information:
+
+SELECT s.*, o.order_type, o.order_weight, c.first_name, c.last_name 
+FROM shipment s
+JOIN orders o ON s.order_id = o.id
+JOIN customer c ON o.sender_id = c.id;
+
+-- Retrieve employee information along with their respective department and branch details:
+SELECT e.*, d.*, b.*
+FROM employee e
+JOIN department d ON e.department_id = d.id
+JOIN branch b ON d.branch_id = b.id;
